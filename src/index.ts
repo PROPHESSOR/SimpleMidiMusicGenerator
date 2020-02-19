@@ -12,7 +12,7 @@ function main() {
 
   const notes = generateFewNotes(10);
 
-  track.addEvent(notes.map(note => new Midi.NoteEvent({pitch: note.toLetter(), duration: "4"})));
+  track.addEvent(notes.map(note => new Midi.NoteEvent({pitch: note.toLetter(), duration: "2"})));
 
   console.log(notes.map(note => note.toLetter()).join(' '));
 
