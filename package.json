@@ -26,5 +26,13 @@
   "bugs": {
     "url": "https://github.com/PROPHESSOR/SimpleMidiMusicGenerator/issues"
   },
-  "homepage": "https://github.com/PROPHESSOR/SimpleMidiMusicGenerator#readme"
+  "homepage": "https://github.com/PROPHESSOR/SimpleMidiMusicGenerator#readme",
+  "dependencies": {
+    "midi-writer-js": "^1.7.2"
+  },
+  "devDependencies": {
+    "@types/node": "^13.7.2",
+    "node-ts": "^5.0.3",
+    "typescript": "^3.7.5"
+  }
 }
