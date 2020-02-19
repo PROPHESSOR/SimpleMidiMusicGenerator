@@ -3,10 +3,25 @@ import Note from "./Note";
 import { randomChoice } from "./Utils";
 import { intervals } from "./Interval";
 
+import fs from 'fs';
+
+// @ts-ignore
+import Midi from 'jsmidgen';
+
 function main() {
-  const notes = generateFewNotes();
+  const file = new Midi.File();
+  const track = new Midi.Track();
+  file.addTrack(track);
+
+  const notes = generateFewNotes(10);
+
+  notes.forEach((note, index) => {
+    track.addNote(0, note.toLetter().toLowerCase(), 64);
+  })
 
   console.log(notes.map(note => note.toLetter()).join(' '));
+
+  fs.writeFileSync('test.mid', file.toBytes(), 'binary');
 }
 
 /**
@@ -29,31 +44,19 @@ function getNextBetterNote(
   return interval[`build${direction}`](prevNote);
 }
 
-function generateFewNotes() {
+function generateFewNotes(number: number) {
   const harmony = new Harmony(9, HarmonyType.minor);
 
   const notes: Array<Note> = [];
 
-  // for (let i = 0; i < 7; i++) {
-  //   notes.push(harmony.newNote(i, 4));
-  // }
+  let prevNote = harmony.newNote(0, 4);
 
-  const note = harmony.newNote(0, 4);
+  notes.push(prevNote);
 
-  notes.push(note);
-
-  // notes.push(getNextBetterNote(harmony, note, notes));
-
-  //
-
-  // notes.push(harmony.newNote(0, 4));
-  // notes.push(harmony.newNote(3, 4));
-  // notes.push(harmony.newNote(7, 4));
-
-  //
-
-  for (let i = 0; i < 10; i++) {
-    notes.push(getNextBetterNote(harmony, note, notes));
+  for (let i = 0; i < number; i++) {
+    const newNote = getNextBetterNote(harmony, prevNote, notes);
+    notes.push(newNote);
+    prevNote = newNote;
   }
 
   return notes;
