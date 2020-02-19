@@ -12,6 +12,8 @@
     ],
     "target": "ES6",
     "rootDir": "src",
-    "moduleResolution": "node"
+    "outDir": "dist",
+    "moduleResolution": "node",
+    "removeComments": true
   }
 }
