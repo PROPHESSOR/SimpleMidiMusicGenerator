@@ -3,6 +3,12 @@ import Note from "./Note";
 import { randomChoice } from "./Utils";
 import { intervals } from "./Interval";
 
+function main() {
+  const notes = generateFewNotes();
+
+  console.log(notes.map(note => note.toLetter()).join(' '));
+}
+
 /**
  * Note (not now): Requires HarmonyType.minor!
  */
@@ -53,4 +59,4 @@ function generateFewNotes() {
   return notes;
 }
 
-console.log(generateFewNotes().map(note => note.toLetter()));
+main();
