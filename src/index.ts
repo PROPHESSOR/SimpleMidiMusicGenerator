@@ -44,12 +44,15 @@ function generateFewNotes(number: number) {
   const harmony = new Harmony(9, HarmonyType.minor);
 
   const notes: Array<Note> = [];
-  const firstNote = harmony.newNote(0, 4);
 
-  notes.push(firstNote);
+  let prevNote = harmony.newNote(0, 4);
+
+  notes.push(prevNote);
 
   for (let i = 0; i < number; i++) {
-    notes.push(getNextBetterNote(harmony, firstNote, notes));
+    const newNote = getNextBetterNote(harmony, prevNote, notes);
+    notes.push(newNote);
+    prevNote = newNote;
   }
 
   return notes;
